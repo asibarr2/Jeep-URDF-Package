@@ -61,6 +61,51 @@
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>
      </visual>
     </link>
+	
+<!-- RPLidar Links -->
+	
+  <!-- Rplidar Center Base -->
+  <link name="laser_base_link">
+     <visual>
+        <geometry>
+	   <mesh filename="package://ros_robotics/meshes/RpLidarBase.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <origin rpy="-1.57079 3.14159 0" xyz="-0.05 0.0135 0.015"/>
+     </visual>
+  </link>
+
+  <!-- RPLidar Spinning Component -->
+  <link name="laser_spinny_link">
+     <visual>
+        <geometry>
+            <mesh filename="package://ros_robotics/meshes/RpLidarSpinnyTop.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+	<origin rpy="-1.57079 3.14159 0" xyz="-0.07 0.0135 -0.0265"/>
+     </visual>
+  </link>	
+
+<!-- ZED Camera Links -->
+
+  <!-- ZED Camera Center -->
+  <link name="zed_camera_center">
+   <visual>
+    <geometry>
+     <mesh filename="package://ros_robotics/meshes/zed.stl"/>
+    </geometry>
+   </visual>
+  </link>
+
+  <!-- ZED Left Camera Optical Frame -->
+  <link name="zed_left_camera_optical_frame"/>
+  
+  <!-- ZED Right Camera Optical Frame -->
+  <link name="zed_right_camera_optical_frame"/>
+
+  <!-- ZED Left Camera Frame -->
+  <link name="zed_left_camera_frame"/>
+
+  <!-- ZED Right Camera Frame -->
+  <link name="zed_right_camera_frame"/>
 
 
                         <!-- Joints are located below -->
@@ -99,5 +144,65 @@
   	 <child link="wheel_back_right"/>
   	 <origin rpy="0 0 0" xyz="0 -0.305 0"/>
   </joint>
+
+
+<!-- RPLIDAR Joints -->
+
+<!-- Sensor Platform to Lidar Base Joint -->   
+  <joint name="base_link_to_lidar_base" type="fixed">
+    <parent link="base_link"/>
+    <child link="laser_base_link"/>
+    <origin rpy="0 0 0" xyz="0.0152 -0.004 0.56"/> <!--Adjust the z-values to move lidar parts up and down here -->
+  </joint>    
+
+<!-- Sensor Base to Spinning Component Joint -->
+   <joint name="lidar_base_to_spinny_link" type="continuous">
+     <parent link="laser_base_link"/>
+     <child link="laser_spinny_link"/>
+     <origin rpy="0 0 0" xyz="0.0179 0.001 0.0465"/> <!--Adjust the z-values to move lidar parts up and down here -->
+   </joint>
+
+<!-- ZED CAMERA JOINTS -->
+
+<!-- ZED Camera Center to ZED Left Camera Frame -->
+   <joint name="zed_left_camera_joint" type="fixed">
+     <parent link="zed_camera_center"/>
+     <child link="zed_left_camera_frame"/>
+     <origin xyz="0 0.03 0" rpy="0 0 0"/>
+   </joint>
+
+<!-- Base Link to ZED Camera Center -->
+   <joint name="base_link_to_ZED_camera_center" type="fixed">
+     <parent link="base_link"/>
+     <child link="zed_camera_center"/>
+     <origin rpy="0 0 0" xyz="0.095 0 0.577"/>
+   </joint>
+
+<!-- ZED Camera Center to ZED Right Camera Frame -->
+   <joint name="ZED_right_camera_joint" type="fixed">
+     <parent link="zed_camera_center"/>
+     <child link="zed_right_camera_frame"/>
+     <origin xyz="0 -0.03 0" rpy="0 0 0"/>
+   </joint>
+
+<!-- ZED Right Camera Optical Joint -->
+   <joint name="zed_right_camera_optical_joint" type="fixed">
+     <parent link="zed_right_camera_frame"/>
+     <child link="zed_right_camera_optical_frame"/>
+     <origin xyz="0 0 0" rpy="-1.57079632679 0.0 -1.57079632679"/>
+   </joint>
+
+   <joint name="zed_left_camera_optical_joint" type="fixed">
+     <parent link="zed_left_camera_frame"/>
+     <child link="zed_left_camera_optical_frame"/>
+     <origin xyz="0 0 0" rpy="-1.57079632679 0.0 -1.57079632679"/>
+   </joint>
+
+<!-- JEEP Base to ZED Left Camera Optical Frame -->
+   <joint name="base_link_to_zed_left_optical" type="fixed">
+     <parent link="base_link"/>
+     <child link="zed_left_camera_optical_frame"/>
+     <origin xyz="0 0 0" rpy="-1.57079632679 0.0 -1.57079632679"/>
+   </joint>
 
 </robot>
