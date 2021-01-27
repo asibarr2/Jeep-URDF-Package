@@ -12,16 +12,6 @@
     </visual>
   </link>
 
-  <!-- Sensor Platform Base -->
-  <link name="sensor_platform">
-    <visual>
-      <geometry>
-        <box size="0.12 0.3 0.0078"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0.0 0"/>
-    </visual>
-  </link>
-
   <!-- Front Left Wheel -->
   <link name="wheel_front_left">
     <visual>
@@ -109,13 +99,6 @@
 
 
                         <!-- Joints are located below -->
-
-<!-- Jeep Base to Sensor Platform Joint -->
-  <joint name="sensor_platform_to_base_link" type="fixed">
-    <parent link="base_link"/>
-    <child link="sensor_platform"/>
-    <origin rpy="0 0 0" xyz="-0.09 0 0.57"/>
-  </joint>
 
 <!-- Jeep Base to Front Left Wheel -->
   <joint name="base_to_wheel_front_left" type="continuous">
