@@ -1,6 +1,6 @@
 # Jeep-URDF-Package
 URDF Package (ROS Melodic) for simulating Jeep in Rviz
-![JEEP Urdf in Rviz][images/RVIZ_Development_1.png]
+! [image](images/RVIZ_Development_1.png)
 
 # Things to keep in mind:
 
