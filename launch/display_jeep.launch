@@ -4,6 +4,7 @@
 	<arg name="gui" default="False" />
 
 	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find ros_robotics)/urdf/jeep.urdf'"/>
+	<param name="robot_description2" command="$(find xacro)/xacro --inorder '$(find ros_robotics)/urdf/lilbot.urdf'"/>
 
 	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
 
