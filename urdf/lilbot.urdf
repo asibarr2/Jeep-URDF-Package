@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<robot name="lilbot_robot">
+
+<link name="base_footprint">
+   <origin rpy="0 0 0" xyz="0 0 0"/>
+</link>
+
+<link name="base_link">
+      <origin rpy="1.57079 0 0" xyz="0 -0.305 0"/>
+</link>
+
+<link name="Base_Frame">
+   <visual>  
+      <geometry>
+                <mesh filename="package://ros_robotics/meshes/LILBOT_w_wheels.xml" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="1.57075 0 0" xyz="0 0 -0.045"/>
+   </visual>
+</link>
+
+<joint name="Base_footprint_to_libot_base" type="fixed">
+   <parent link="base_footprint"/>
+   <child link="Base_Frame"/>
+   <origin rpy="0 0 0" xyz="0 0 0.160"/>
+</joint>
+
+<joint name="Base_frame_to_base_link" type="fixed">
+   <parent link="base_footprint"/>
+   <child link="base_link"/>
+   <origin rpy="0 0 0" xyz="0 0 0.160"/>
+</joint>
+
+<joint name="Base_footprint_to_base" type="fixed">
+   <parent link="base_link"/>
+   <child link="Base_Frame"/>
+   <origin rpy="0 0 0" xyz="0 0 0.160"/>
+</joint>
+
+</robot>
+
