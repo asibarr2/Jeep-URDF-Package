@@ -1,3 +1,5 @@
+### This branch is for setting up the Jeep with HTC Vive Trackers
+
 # Jeep-URDF-Package
 URDF Package (ROS Melodic) for simulating Jeep in Rviz
 
