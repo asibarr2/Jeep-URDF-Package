@@ -3,7 +3,7 @@
 # Jeep-URDF-Package
 URDF Package (ROS Melodic) for simulating Jeep with HTC Vice Trackers in Rviz
 
-![image](images/RVIZ_Development_1.png?raw=true)
+![image](images/HTC-VIVE-JEEP.png?raw=true)
 
 # Things to keep in mind:
 
