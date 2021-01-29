@@ -2,6 +2,21 @@
 
 <robot name="jeepModel">
 
+  <!-- Base Frame for lilbots -->
+  <link name="base_footprint">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </link>
+
+ <!-- Lilbot Base Frame -->
+  <link name="Base_Frame">
+   <visual>  
+      <geometry>
+         <mesh filename="package://ros_robotics/meshes/LILBOT_w_wheels.xml" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="1.57075 0 0" xyz="0 0 -0.045"/>
+   </visual>
+  </link>
+
   <!-- Center Base with Jeep Model -->
   <link name="base_link">
     <visual>
@@ -51,9 +66,8 @@
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>
      </visual>
     </link>
-	
-<!-- RPLidar Links -->
-	
+
+<!-- RPLIDAR LINK SETUP -->
   <!-- Rplidar Center Base -->
   <link name="laser_base_link">
      <visual>
@@ -72,9 +86,25 @@
         </geometry>
 	<origin rpy="-1.57079 3.14159 0" xyz="-0.07 0.0135 -0.0265"/>
      </visual>
-  </link>	
+  </link>
 
-<!-- ZED Camera Links -->
+<!-- RPLidar Data Component -->
+<link name="laser_data_link">
+   <visual>
+      <geometry>
+
+         <box size="0.02 0.02 0.02"/>
+            <material name="black">
+                <color rgba="0 0 0 0"/>
+            </material>
+
+      </geometry>
+
+      <origin rpy="-1.57079 3.14159 0" xyz="-0.05 0.0135 0.015"/>
+   </visual>
+</link>
+
+<!-- ZED CAMERA LINK SETUP -->
 
   <!-- ZED Camera Center -->
   <link name="zed_camera_center">
@@ -98,38 +128,128 @@
   <link name="zed_right_camera_frame"/>
 
 
+
+<!-- LIGHT HOUSE FRAME -->
+   <!-- Minimum Lighthouse X -->
+   <link name="minimum_lighthouse_x">
+     <visual>
+       <geometry>
+         <box size="0.05 4.05 0.05"/>
+       </geometry>
+       <material name="black"/>
+      <origin rpy="0 0 0" xyz="0 0.0 0"/>
+     </visual>
+   </link>
+
+   <!-- Minimum Lighthouse Y -->
+   <link name="maximum_lighthouse_x">
+     <visual>
+      <geometry>
+         <box size="0.05 4.05 0.05"/>
+      </geometry>
+      <material name="black"/>
+      <origin rpy="0 0 0" xyz="0 0.0 0"/>
+     </visual>
+   </link>
+
+<link name="minimum_lighthouse_xy">
+   <visual>
+      <geometry>
+         <box size="2.65 0.05 0.05"/>
+      </geometry>
+      <material name="black"/>
+      <origin rpy="0 0 0" xyz="0 0.0 0"/>
+   </visual>
+</link>
+
+<!-- Sensor Platform Base -->
+<link name="maximum_lighthouse_xy">
+   <visual>
+      <geometry>
+         <box size="2.65 0.05 0.05"/>
+      </geometry>
+      <material name="black"/>
+      <origin rpy="0 0 0" xyz="0 0.0 0"/>
+   </visual>
+</link>
+
+<!-- Sensor Platform Base -->
+<link name="lighthouse_mount">
+   <visual>
+      <geometry>
+         <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <material name="black"/>
+      <origin rpy="0 0 0" xyz="0. 0.0 0"/>
+   </visual>
+</link>
+
+<!-- Sensor Platform Base -->
+<link name="lighthouse_rotate">
+   <visual>
+      <geometry>
+         <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <material name="black"/>
+      <origin rpy="0 0 0" xyz="0. 0.0 0"/>
+   </visual>
+</link>
+
+<!-- Sensor Platform Base -->
+<link name="Lighthouse BeFrame">
+   <visual>
+      <geometry>
+         <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="black"/>
+      <origin rpy="0 0 0" xyz="0. 0.0 0"/>
+   </visual>
+</link>
+
+<link name="Lighthouse Frame">
+   <visual>
+      <geometry>
+         <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <material name="red"/>
+      <origin rpy="0 0 0" xyz="0. 0.0 0"/>
+   </visual>
+</link>
+
                         <!-- Joints are located below -->
 
-<!-- Jeep Base to Front Left Wheel -->
+<!-- JEEP Chassis Joints -->
+
+<!-- Jeep Base to Front Left Wheel Joint -->
   <joint name="base_to_wheel_front_left" type="continuous">
     <parent link="base_link"/>
     <child link="wheel_front_left"/>
     <origin rpy="0 0 0" xyz="0.71 0.305 0"/>
   </joint>
 
-<!-- Jeep Base to Front Right Wheel -->
+<!-- Jeep Base to Front Right Wheel Joint -->
   <joint name="base_to_wheel_front_right" type="continuous">
     <parent link="base_link"/>
     <child link="wheel_front_right"/>
     <origin rpy="0 0 0" xyz="0.71 -0.305 0"/>
   </joint>
 
-<!-- Jeep Base to Back Left Wheel -->
+<!-- Jeep Base to Back Left Wheel Joint -->
   <joint name="base_to_wheel_back_left" type="continuous">
-	  <parent link="base_link"/>
+    <parent link="base_link"/>
     <child link="wheel_back_left"/>
     <origin rpy="0 0 0" xyz="0 0.305 0"/>
   </joint>
 
-
+<!-- Jeep Base to Back Right Wheel Joint -->
   <joint name="base_to_wheel_back_right" type="continuous">
-  	 <parent link="base_link"/>
-  	 <child link="wheel_back_right"/>
-  	 <origin rpy="0 0 0" xyz="0 -0.305 0"/>
+    <parent link="base_link"/>
+    <child link="wheel_back_right"/>
+    <origin rpy="0 0 0" xyz="0 -0.305 0"/>
   </joint>
 
 
-<!-- RPLIDAR Joints -->
+<!-- Lidar Joints -->
 
 <!-- Sensor Platform to Lidar Base Joint -->   
   <joint name="base_link_to_lidar_base" type="fixed">
@@ -144,6 +264,23 @@
      <child link="laser_spinny_link"/>
      <origin rpy="0 0 0" xyz="0.0179 0.001 0.0465"/> <!--Adjust the z-values to move lidar parts up and down here -->
    </joint>
+
+<!-- Laser Base to Lidar Data Link -->
+ <joint name="laser_base_link_to_data_link" type="fixed">
+	   <parent link="laser_base_link"/>
+	   <child link="laser_data_link"/>
+           <origin rpy="0 0 0" xyz="0.02 0 0.0415"/>
+        </joint>
+
+<!-- Base Link to Lider Data Link -->
+ <joint name="laser_data_to_base_link" type="fixed">
+            <parent link="base_link"/>
+            <child link="laser_data_link" />
+            <origin rpy="0 0 0" xyz="0.02 0 0.6"/>
+     </joint>
+
+
+
 
 <!-- ZED CAMERA JOINTS -->
 
@@ -187,5 +324,75 @@
      <child link="zed_left_camera_optical_frame"/>
      <origin xyz="0 0 0" rpy="-1.57079632679 0.0 -1.57079632679"/>
    </joint>
+
+
+
+<!-- LILBOT JOINT SETUP -->
+<joint name="base_footprint_to_base_link" type="fixed">
+	   <parent link="base_footprint"/>
+	   <child link="base_link"/>
+           <origin rpy="0 0 0" xyz="0 0 0.160"/> <!-- -0.17+0.003-->
+</joint>
+
+<joint name="Base_footprint_to_libot_base" type="fixed">
+   <parent link="base_footprint"/>
+   <child link="Base_Frame"/>
+   <origin rpy="0 0 0" xyz="0 0 0.160"/>
+</joint>
+
+<!-- LIGHTHOUSE JOINT SETUP -->
+<joint name="lighthouse_mount_to_lighthouse_rotate" type="fixed">
+	   <parent link="lighthouse_mount"/>
+	   <child link="lighthouse_rotate"/>
+           <origin rpy="0.43 0.03 0" xyz="0 0 0.57"/>
+    </joint>
+
+   
+    <joint name="lighthouse_rotate_to_lighthouse_beframe" type="fixed">
+	   <parent link="lighthouse_rotate"/>
+	   <child link="Lighthouse BeFrame"/>
+           <origin rpy="1.57079632679 3.14159 0.0" xyz="0 0 0.07620"/>
+    </joint>
+
+    <joint name="lighthouse_beframe_to_lighthouse_frame" type="fixed">
+	   <parent link="Lighthouse BeFrame"/>
+	   <child link="Lighthouse Frame"/>
+           <origin rpy="0 0 0.0" xyz="0 0 0.1002"/>
+    </joint>
+
+-->
+
+    <joint name="sensor_platform_to_lighthouse_mount" type="fixed">
+	   <parent link="base_link"/>
+
+	   <child link="lighthouse_mount"/>s
+
+           <origin rpy="0 0 1.57079632679" xyz="0.85 0 0.0"/>
+    </joint>
+
+ <joint name="base_link_to_minimum_lighthouse_x" type="fixed">
+	   <parent link="base_link"/>
+	   <child link="minimum_lighthouse_x"/>
+           <origin rpy="0 0 0" xyz="1.4 0 0"/><!--73-->
+    </joint>
+
+    <joint name="base_link_to_maximum_lighthouse_x" type="fixed">
+	   <parent link="base_link"/>
+	   <child link="maximum_lighthouse_x"/>
+           <origin rpy="0 0 0" xyz="4.0 0 0"/><!--73-->
+    </joint>
+
+
+    <joint name="base_link_to_minimum_lighthouse_xy" type="fixed">
+	   <parent link="base_link"/>
+	   <child link="minimum_lighthouse_xy"/>
+           <origin rpy="0 0 0" xyz="2.7 -2 0"/><!--73-->
+    </joint>
+
+    <joint name="base_link_to_maximum_lighthouse_xy" type="fixed">
+	   <parent link="base_link"/>
+	   <child link="maximum_lighthouse_xy"/>
+           <origin rpy="0 0 0" xyz="2.7 2 0"/><!--73-->
+    </joint>
 
 </robot>
